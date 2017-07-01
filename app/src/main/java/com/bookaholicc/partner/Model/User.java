@@ -6,7 +6,7 @@ package com.bookaholicc.partner.Model;
  */
 
 public class User {
-    private int userId;
+    private int partnerid;
     private String firstName;
     private String lastName;
     private String eMailAddress;
@@ -17,6 +17,7 @@ public class User {
     private int aadhaarNo;
     private int panNo;
 
+
     public User() {
     }
 
@@ -26,8 +27,8 @@ public class User {
     /*The Defalt Location for Longitude*/
     private double def_Lon;
 
-    public User(int userId, String firstName, String lastName, String eMailAddress, String phoneNumber, String imageUrl, String isMember, String isVerified, int aadhaarNo, int panNo, double def_Lat, double def_Lon) {
-        this.userId = userId;
+    public User(int partnerid, String firstName, String lastName, String eMailAddress, String phoneNumber, String imageUrl, String isMember, String isVerified, int aadhaarNo, int panNo, double def_Lat, double def_Lon) {
+        this.partnerid = partnerid;
         this.firstName = firstName;
         this.lastName = lastName;
         this.eMailAddress = eMailAddress;
@@ -41,12 +42,12 @@ public class User {
         this.def_Lon = def_Lon;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getPartnerid() {
+        return partnerid;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setPartnerid(int partnerid) {
+        this.partnerid = partnerid;
     }
 
     public String getFirstName() {
@@ -135,5 +136,10 @@ public class User {
 
     public void setDef_Lon(double def_Lon) {
         this.def_Lon = def_Lon;
+    }
+
+    public int getPartnerId() {
+
+        return partnerid;
     }
 }

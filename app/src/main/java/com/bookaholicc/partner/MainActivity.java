@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,13 +15,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.bookaholicc.partner.Fragments.BookFragement;
+import com.bookaholicc.partner.Fragments.CheckOutFragment;
+import com.bookaholicc.partner.Fragments.EarningFragment;
 import com.bookaholicc.partner.Fragments.HomeFragement;
+import com.bookaholicc.partner.Fragments.NotificationFragment;
+import com.bookaholicc.partner.Fragments.ProfileFragment;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnTabSelectListener, OnTabReselectListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnTabSelectListener, OnTabReselectListener, HomeFragement.homeFragmentCallbacks{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +38,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -49,6 +48,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        showMainFrag();
+        setUpBottomar();
 
 
     }
@@ -130,11 +131,59 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onTabSelected(@IdRes int tabId) {
+        Fragment mFragment = null;
+        String transactionString = "none";
+        switch (tabId) {
+            case  R.id.home_tab:
+                mFragment = new HomeFragement();
+                break;
+            case R.id.profile_tab:
+                mFragment = new ProfileFragment();
+                break;
+            case R.id.noti_tab :
+                mFragment = new NotificationFragment();
+                break;
+            case R.id.book_tab :
+                mFragment = new BookFragement();
+                break;
+            case R.id.checkout_tab :
+                mFragment = new CheckOutFragment();
+                break;
+        }
+
+        getSupportFragmentManager().
+                beginTransaction()
+                .replace(R.id.frag_holder_main,mFragment,transactionString)
+                .addToBackStack(transactionString)
+                .commit();
+
 
     }
 
     @Override
     public void onTabReSelected(@IdRes int tabId) {
+
+    }
+
+    @Override
+    public void showEarningsPage() {
+        EarningFragment mFragment  = new EarningFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frag_holder_main,mFragment,"earning")
+                .commit();
+    }
+
+    @Override
+    public void showBooksPage() {
+        BookFragement mFragement = new BookFragement();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frag_holder_main,mFragement,"earning")
+                .commit();
+
+    }
+
+    @Override
+    public void showTransactions() {
 
     }
 }

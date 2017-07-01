@@ -67,8 +67,8 @@ public class DataStore {
     private static final String IS_NEW_ARRIVALS_DATA_PRESENT = "NEW_ARRIVALS";
     private static final String FIRST_NAME = "FIRST_NAME";
     private static final String LAST_NAME = "LAST_NAME";
-
-
+    private static final String DOB_STRING = "DOB";
+    private static final String PARTNER_ID = "partnerid";
 
 
     private static DataStore mStore = null;
@@ -98,9 +98,16 @@ public class DataStore {
         }
     }
 
+    public  void setPartnerid(int partnerid){
 
-    public  String getPartnerId() {
-        return mSharedPrefrences.getString(USER_ID,null);
+        editor.putInt(PARTNER_ID,partnerid);
+        editor.apply();
+
+    }
+
+
+    public  int getPartnerId() {
+        return mSharedPrefrences.getInt(USER_ID,0);
     }
 
     public void setEmailId(String emailIdTag) {
@@ -339,5 +346,18 @@ public class DataStore {
 
     public String getToken() {
         return mSharedPrefrences.getString(TOKEN,null);
+    }
+
+    public String getDOB() {
+        return mSharedPrefrences.getString(DOB_STRING,null);
+    }
+    public void setDOB(String dob) {
+        editor.putString(DOB_STRING,dob);
+        editor.apply();
+    }
+
+    public void setPartnerId(String partnerId) {
+        editor.putString(PARTNER_ID,partnerId);
+        editor.apply();
     }
 }

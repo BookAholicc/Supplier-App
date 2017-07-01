@@ -80,9 +80,16 @@ public class APIUtils {
     /*ADD TO LIST*/
     public static final String HOME_ENDPOINT_ADD_TO_LIST = "";
 
+    //// TODO: 1/7/17  Add String
+    public static final String PARTNER_HOME_API   = "https://us-central1-bookaholic-786.cloudfunctions.net/getPartnerHome";
+    public static final String BOOK_LIST_API = "https://us-central1-bookaholic-786.cloudfunctions.net/getPartnerBook";
+    public static final String AMOUNT_EARNED = "amountEarned";
+    public static final String BOOK_COUNT = "bookCount";
+    public static final String ORDERS_COUNT = "ordersCount";
+
     public static String SAVE_TOKEN_API = "";
 
-    public static String PARTNER_EARNINGS_API = "";
+    public static String PARTNER_EARNINGS_API = "https://us-central1-bookaholic-786.cloudfunctions.net/getPartnerTransactions";
 
 
 
@@ -102,7 +109,7 @@ public class APIUtils {
     public static String PRODUCTS_KEYWORD = "products";
     public static String ORDER_LAT = "orderLat";
     public static String ORDER_LON = "orderLon";
-    public static String AMOUNT = "amount";
+    public static String AMOUNT = "MRP";
     public static String IS_ACCEPTED = "isAccepted";
     public static String ORDER_ID = "orderId";
     public static String ORDER_ACCEPTED = "orderInsertedAt";

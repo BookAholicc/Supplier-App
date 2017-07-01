@@ -1,5 +1,6 @@
 package com.bookaholicc.partner.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,10 +18,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bookaholicc.partner.Adapter.EarningAdapter;
 import com.bookaholicc.partner.Model.Earning;
+import com.bookaholicc.partner.Network.AppRequestQueue;
 import com.bookaholicc.partner.R;
 import com.bookaholicc.partner.StorageHelpers.DataStore;
 import com.bookaholicc.partner.utils.APIUtils;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -48,6 +51,8 @@ public class EarningFragment extends Fragment implements Response.Listener<JSONO
 
     @BindView(R.id.earning_list)
     RecyclerView mList;
+
+    ProgressDialog mDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,21 +83,35 @@ public class EarningFragment extends Fragment implements Response.Listener<JSONO
 
         getEarnings();
 
-
-
         return v;
 
     }
 
+    private void showProgressView() {
+        mDialog = new ProgressDialog(mContext);
+        mDialog.setTitle("Getting latest Information");
+        mDialog.setIndeterminate(true);
+        mDialog.show();
+    }
+
+    private void hideProgresDialog() {
+        if (mDialog != null && mDialog.isShowing()){
+            mDialog.dismiss();
+        }
+    }
+
     private void getEarnings() {
         DataStore mStore  = DataStore.getStorageInstance(mContext);
-        String partnerId = mStore.getPartnerId();
+        int partnerId = mStore.getPartnerId();
 
         try {
 
             JSONObject mJsonObject = new JSONObject();
-            mJsonObject.put(APIUtils.PARTNER_ID, partnerId);
+            mJsonObject.put(APIUtils.PARTNER_ID, 4); //// TODO: 2/7/17 cange
             JsonObjectRequest mRequest  = new JsonObjectRequest(Request.Method.POST,APIUtils.PARTNER_EARNINGS_API,mJsonObject,this,this);
+            AppRequestQueue mRequestQueue = AppRequestQueue.getInstance(mContext);
+            mRequestQueue.addToRequestQue(mRequest);
+
         }
         catch (Exception e){
             Log.d(TAGI, "getEarnings: ");
@@ -154,13 +173,29 @@ public class EarningFragment extends Fragment implements Response.Listener<JSONO
     }
 
     private List<Earning> parseData(JSONObject response) {
-        List<Earning> mList = new ArrayList<>();
-        mList.add(new Earning("4","2 Weeks","45","sdsdf","asdfdsf"));
-        return mList;
+
+        try {
+
+
+            List<Earning> mList = new ArrayList<>();
+            JSONArray mArray = response.getJSONArray("transactions");
+            for (int i=0; i<mArray.length();i++){
+                JSONObject mEarningObj  = mArray.getJSONObject(i);
+                mList.add(new Earning(mEarningObj.getString("productName"),
+                        mEarningObj.getString("amount"),
+                        mEarningObj.getString(APIUtils.DURATION)));
+            }
+
+            return mList;
+        }
+        catch (Exception e){
+            Log.d(TAG, "parseData:Exception  "+e.getLocalizedMessage());
+            return null;
+        }
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
-
+        Log.d(TAG, "onErrorResponse: Exception "+error.getLocalizedMessage());
     }
 }

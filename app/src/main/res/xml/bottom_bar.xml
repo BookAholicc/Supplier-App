@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tabs>
     <tab
-        id="@+id/tab_home"
+        id="@+id/home_tab"
         icon="@drawable/ic_home"
         barColorWhenSelected="#36353F"
         title="Home" />
     <tab
-        id="@+id/tab_my_books"
+        id="@+id/book_tab"
         icon="@drawable/ic_list"
         barColorWhenSelected="#36353F"
         title="My Books" />
     <tab
-        id="@+id/tab_notifications"
+        id="@+id/noti_tab"
         icon="@drawable/ic_notifications_none_black_24px"
         barColorWhenSelected="#36353F"
         title="Notifications" />
     <tab
-        id="@+id/tab_profile"
+        id="@+id/profile_tab"
         icon="@drawable/ic_avatar"
         barColorWhenSelected="#36353F"
         title="Profile" />
     <tab
-        id="@+id/tab_checkout"
+        id="@+id/checkout_tab"
         icon="@drawable/ic_cart"
         barColorWhenSelected="#36353F"
         title="Checkout" />

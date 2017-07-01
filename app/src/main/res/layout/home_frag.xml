@@ -9,6 +9,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="91dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textSize="30sp"
         android:text="3200" />
 
@@ -21,42 +22,29 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/home_tot_p_text"
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="61dp"
-        android:text="Total Products With BookAholic"
-        android:layout_below="@+id/textView3"
-        android:layout_toStartOf="@+id/home_amount" />
-
-    <TextView
-        android:id="@+id/home_total_p_val"
+        android:id="@+id/home_total_order_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="82"
+        android:textSize="22sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:gravity="center"
         android:layout_marginRight="32dp"
-        android:layout_alignTop="@+id/home_tot_p_text"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/home_tot_p_text" />
+        android:layout_alignBaseline="@+id/home_books_count"
+        android:layout_alignBottom="@+id/home_books_count"
+        android:layout_toEndOf="@+id/home_bill_breakdown" />
 
     <TextView
-        android:id="@+id/home_p_exchanged"
+        android:id="@+id/home_books_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/home_tot_p_text"
-        android:layout_below="@+id/home_tot_p_text"
-        android:layout_marginTop="61dp"
-        android:text="Products Exchanged " />
-
-    <TextView
-        android:id="@+id/home_p_exchnaged_val"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/home_total_p_val"
-        android:layout_alignTop="@+id/home_p_exchanged"
-        android:text="45" />
+        android:text="45"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textSize="22sp"
+        android:layout_below="@+id/home_month"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        />
 
     <TextView
         android:id="@+id/home_month"
@@ -64,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:text="August 2017" />
 
     <Button
@@ -71,9 +60,30 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/home_p_exchanged"
+        android:text="See Earnings Transactions"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
-        android:text="See Earnings Breakdown" />
+        android:layout_marginBottom="92dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Books"
+        android:gravity="center"
+        android:layout_below="@+id/home_books_count"
+        android:layout_marginLeft="16dp"
+        android:layout_alignBottom="@+id/order_count_text" />
+    <TextView
+        android:id="@+id/order_count_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Transactions"
+        android:layout_marginRight="16dp"
+        android:gravity="center"
+
+
+        android:layout_below="@+id/home_total_order_count"
+        android:layout_toEndOf="@+id/textView3" />
 
 </RelativeLayout>

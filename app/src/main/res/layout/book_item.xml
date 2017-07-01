@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:weightSum="1"
+    android:layout_width="match_parent" android:layout_height="80dp">
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_weight="0.2"
+        android:id="@+id/b_item_purl"
+        android:src="@mipmap/bookaholic"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="0.6"
+        android:textSize="18sp"
+        android:padding="4dp"
+        android:id="@+id/b_item_pname"
+        android:maxLines="3"
+        android:gravity="left"
+        android:ellipsize="end"
+        android:text="This is a logn booajfjakfjsdfjahjfkhajsdfhkashdfjkhjskdhfkjahsdfjkhajksfdhjahsdfkjhasfdk"
+        android:layout_height="match_parent" />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="0.2"
+        android:text="456"
+        android:id="@+id/b_item_amount"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

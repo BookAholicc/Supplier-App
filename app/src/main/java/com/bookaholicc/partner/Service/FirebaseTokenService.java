@@ -35,7 +35,7 @@ public class FirebaseTokenService extends FirebaseInstanceIdService implements R
         super.onTokenRefresh();
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "Refreshed token: " + refreshedToken);
-        String userId = null;
+        int  userId = 0;
 
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
@@ -45,7 +45,7 @@ public class FirebaseTokenService extends FirebaseInstanceIdService implements R
             userId = mStore.getPartnerId();
         }
 
-        if (userId != null && refreshedToken != null){
+        if (userId != 0 && refreshedToken != null){
             sendTokenToServer(userId,refreshedToken);
         }
     }
@@ -58,7 +58,7 @@ public class FirebaseTokenService extends FirebaseInstanceIdService implements R
      *          "fromWhere" --> Indicating where to save this token
      *
      * */
-    private void sendTokenToServer(String userId, String refreshedToken) {
+    private void sendTokenToServer(int userId, String refreshedToken) {
 
         JSONObject mObject = new JSONObject();
         try {

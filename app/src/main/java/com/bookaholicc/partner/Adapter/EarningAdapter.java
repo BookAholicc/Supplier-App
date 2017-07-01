@@ -11,12 +11,14 @@ import android.widget.TextView;
 import com.bookaholicc.partner.Fragments.EarningFragment;
 import com.bookaholicc.partner.Model.Earning;
 import com.bookaholicc.partner.R;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by nandhu on 23/6/17.
@@ -41,7 +43,12 @@ public class EarningAdapter extends RecyclerView.Adapter<EarningAdapter.Earnings
 
     @Override
     public void onBindViewHolder(EarningsHolder holder, int position) {
-
+            holder.pName.setText(mList.get(position).getProductName());
+        holder.duration.setText(mList.get(position).getDuraion());
+        Picasso.with(mContext)
+                .load(mList.get(position).getProductImage())
+                .into(holder.mImage);
+        holder.price.setText(mList.get(position).getAmount());
     }
 
     @Override
@@ -59,6 +66,7 @@ public class EarningAdapter extends RecyclerView.Adapter<EarningAdapter.Earnings
         @BindView(R.id.earning_item_image) ImageView mImage;
         public EarningsHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this,itemView);
         }
     }
 }

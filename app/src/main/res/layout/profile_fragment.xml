@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginBottom="20dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@drawable/login_background_gradient"
+        android:layout_height="match_parent">
+
+       <com.bookaholicc.partner.CustomUI.ForegroundImageView
+            android:layout_width="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/chn_profile_image"
+            app:srcCompat="@drawable/ic_menu_send"
+            android:layout_height="100dp" />
+
+        <com.bookaholicc.partner.CustomUI.HelviticaLight
+            android:text="112214"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/elf_id_text"
+            style="@style/change_profile_bottom_text"
+            android:layout_alignLeft="@+id/elf_id_text"
+            android:layout_alignStart="@+id/elf_id_text"
+            android:layout_marginTop="4dp"
+            android:id="@+id/partner_id" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:id="@+id/elf_id_view"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_below="@+id/personal_info_text"
+            android:background="@color/material_pink900"/>
+
+        <com.bookaholicc.partner.CustomUI.HelviticaLight
+            android:text="Personal Info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/personal_info_text"
+            android:layout_marginTop="12dp"
+            android:textSize="18sp"
+            android:textColor="@color/material_pink700"
+            android:layout_below="@+id/partner_id"
+            android:layout_alignLeft="@+id/partner_id"
+            android:layout_alignStart="@+id/partner_id" />
+
+
+        <com.bookaholicc.partner.CustomUI.HelviticaLight
+            android:text="Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/elf_id_view"
+            style="@style/change_profile_top_text"
+            android:layout_alignLeft="@+id/personal_info_text"
+            android:layout_alignStart="@+id/personal_info_text"
+            android:layout_marginTop="16dp"
+            android:id="@+id/full_name_text" />
+
+        <com.bookaholicc.partner.CustomUI.HelviticaLight
+            android:text="My Name is"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/change_profile_bottom_text"
+            android:layout_below="@+id/full_name_text"
+            android:layout_alignLeft="@+id/full_name_text"
+            android:layout_alignStart="@+id/full_name_text"
+            android:layout_marginTop="4dp"
+            android:id="@+id/profile_name_value" />
+
+        <com.bookaholicc.partner.CustomUI.HelviticaLight
+            android:text="Date of Birth"
+            android:layout_width="wrap_content"
+            style="@style/change_profile_top_text"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="29dp"
+            android:id="@+id/chg_profile_school_name"
+            android:layout_below="@+id/profile_name_value"
+            android:layout_alignStart="@+id/profile_name_value" />
+
+        <com.bookaholicc.partner.CustomUI.HelviticaLight
+            android:text="23 June 1988"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/change_profile_bottom_text"
+            android:layout_below="@+id/chg_profile_school_name"
+            android:layout_alignLeft="@+id/chg_profile_school_name"
+            android:layout_alignStart="@+id/chg_profile_school_name"
+            android:layout_marginTop="4dp"
+            android:id="@+id/profile_dob" />
+
+        <com.bookaholicc.partner.CustomUI.HelviticaLight
+            android:text="Contact Details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chg_profile_contact"
+            android:layout_marginTop="12dp"
+            android:textSize="18sp"
+            android:textColor="@color/material_pink700"
+            android:layout_below="@+id/profile_dob"
+            android:layout_alignLeft="@+id/partner_id"
+            android:layout_alignStart="@+id/partner_id" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:id="@+id/cont_view"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_below="@id/chg_profile_contact"
+            android:background="@color/material_pink900"/>
+
+        <com.bookaholicc.partner.CustomUI.HelviticaLight
+            android:text="Email"
+            style="@style/change_profile_top_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cont_view"
+            android:layout_alignLeft="@+id/chg_profile_contact"
+            android:layout_alignStart="@+id/chg_profile_contact"
+            android:layout_marginTop="16dp"
+            android:id="@+id/textView12" />
+
+        <com.bookaholicc.partner.CustomUI.HelviticaLight
+            android:text="partner@gmail.com"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/change_profile_bottom_text"
+            android:layout_below="@+id/textView12"
+            android:layout_alignLeft="@+id/textView12"
+            android:layout_alignStart="@+id/textView12"
+            android:layout_marginTop="4dp"
+            android:id="@+id/profile_email_value" />
+
+        <com.bookaholicc.partner.CustomUI.HelviticaLight
+            android:text="9688612122"
+            style="@style/change_profile_bottom_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView14"
+            android:layout_alignLeft="@+id/profile_email_value"
+            android:layout_alignStart="@+id/profile_email_value"
+            android:layout_marginTop="4dp"
+            android:id="@+id/profile_phone_value" />
+
+        <com.bookaholicc.partner.CustomUI.HelviticaLight
+            android:text="Partner  ID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            style="@style/change_profile_top_text"
+            android:layout_marginStart="12dp"
+            android:id="@+id/elf_id_text"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/chn_profile_image"
+            android:layout_alignLeft="@+id/elf_id_view"
+            android:layout_alignStart="@+id/elf_id_view" />
+
+        <com.bookaholicc.partner.CustomUI.HelviticaLight
+            android:text="Phone Number"
+            android:layout_width="wrap_content"
+            style="@style/change_profile_top_text"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
+
+            android:id="@+id/textView14"
+            android:layout_below="@+id/profile_email_value"
+            android:layout_alignLeft="@+id/profile_phone_value"
+            android:layout_alignStart="@+id/profile_phone_value" />
+
+
+    </RelativeLayout>
+</ScrollView>
