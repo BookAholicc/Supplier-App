@@ -1,14 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bookaholicc.partner.MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+
+        </android.support.v7.widget.Toolbar>
+
+
+    </android.support.design.widget.AppBarLayout>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_height="match_parent">
+
+    <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+        android:layout_width="match_parent"
+        android:gravity="left|center_vertical"
+        android:textStyle="bold"
+        android:layout_marginLeft="12dp"
+        android:id="@+id/trans_text"
+        android:layout_marginTop="12dp"
+        android:text="Your Transactions"
+        android:textSize="22sp"
+        android:layout_height="wrap_content" />
+            <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+                android:layout_width="match_parent"
+                android:layout_below="@+id/trans_text"
+                android:layout_marginLeft="12dp"
+                android:id="@+id/month_text"
+                android:text="For the month of 28 June,2097"
+                android:layout_height="wrap_content" />
+
 
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/earning_list"
         android:layout_marginTop="60dp"
+
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
+
+    </android.support.design.widget.CoordinatorLayout>

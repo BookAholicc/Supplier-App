@@ -12,7 +12,7 @@ public class MiniProduct {
     private int pid;
     private int amount;
 
-    public MiniProduct(int pid,String productName, String imageURL, int amount) {
+    public MiniProduct(int pid ,String productName, String imageURL, int amount) {
         this.productName = productName;
         this.imageURL = imageURL;
         this.pid = pid;

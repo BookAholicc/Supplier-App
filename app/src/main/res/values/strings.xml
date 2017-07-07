@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">Partner</string>
+    <string name="app_name">BookAholic Partner</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="infos">Hello, Welcome..!! </string>
-    <string name="tc"><![CDATA[By Registering , You accept to BookAholic Terms & Conditions]]></string>
+    <string name="infos">some details we need for your safety!</string>
+    <string name="rs">\u20B9</string>
+    <string name="tc"><![CDATA[By Registering , You accept to Bookaholic Terms & Conditions]]></string>
 </resources>

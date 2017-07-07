@@ -19,6 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity.FirstActivity"/>
+        <activity android:name=".Activity.ProfileActivity"/>
+        <activity android:name=".Activity.EarningsActivity"/>
+        <activity android:name=".Activity.SignUpActivity"/>
+        <activity android:name=".Activity.BooksActivity"/>
+        <activity android:name=".Activity.NotifcationsActivity"/>
+
     </application>
 
 </manifest>

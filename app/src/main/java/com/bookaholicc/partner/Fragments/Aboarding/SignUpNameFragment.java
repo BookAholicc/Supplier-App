@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import com.bookaholicc.partner.utils.StringValidator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+
 
 /**
  * Created by nandhu on 2/6/17.
@@ -39,6 +42,7 @@ public class SignUpNameFragment extends Fragment implements View.OnClickListener
 
     /*A Callback Which Delivers The result to Activity*/
     private SignUpCallback mCallback;
+    private String TAG ="NAME";
 
 
     public SignUpCallback getmCallback() {
@@ -62,8 +66,6 @@ public class SignUpNameFragment extends Fragment implements View.OnClickListener
 
 
         ButterKnife.bind(this, mView);
-
-
         mSubmitButton.setOnClickListener(this);
 
         return mView;
@@ -85,6 +87,7 @@ public class SignUpNameFragment extends Fragment implements View.OnClickListener
         super.onDestroy();
         if (mContext != null) {
             mContext = null;
+            mCallback = null;
         }
     }
 
@@ -96,9 +99,7 @@ public class SignUpNameFragment extends Fragment implements View.OnClickListener
     @Override
     public void onStop() {
         super.onStop();
-        if (mCallback != null){
-            mCallback.noSignUp();
-        }
+
     }
 
     @Override
@@ -110,6 +111,7 @@ public class SignUpNameFragment extends Fragment implements View.OnClickListener
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
+        mCallback = (SignUpCallback) context;
     }
 
     @Override
@@ -142,7 +144,14 @@ public class SignUpNameFragment extends Fragment implements View.OnClickListener
                 //Correct UserName
                 if (StringValidator.CheckUserName(vLastName)){
                     //Last name is Also Correct
-                  mCallback.showEmailFragment(vFirstName,vLastName);
+                    try {
+                        Log.d(TAG, "Name "+vFirstName + " LastName "+vLastName);
+
+                        mCallback.showEmailFragment(vFirstName,vLastName);
+                    }
+                    catch (Exception e){
+                        Log.d(TAG, "showEmailPassPage: ");
+                    }
                 }
                 else{
                     Snackbar.make(mView,"Enter Last Name",Snackbar.LENGTH_SHORT).show();

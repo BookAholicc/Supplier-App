@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,13 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.bookaholicc.partner.R;
 import com.bookaholicc.partner.utils.ScreenUtil;
+import com.squareup.picasso.Picasso;
+
+import java.util.IllegalFormatException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,12 +46,14 @@ public class PartnerSignUpFragment extends Fragment implements View.OnClickListe
     ImageView mLogoImage;
 
     @BindView(R.id.ua_root)
-    FrameLayout mRoot;
+    RelativeLayout mRoot;
     private RootCallback mCallback;
+    private String TAG = "PARTNERSIGNUP";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate: ");
     }
 
     @Override
@@ -65,6 +72,11 @@ public class PartnerSignUpFragment extends Fragment implements View.OnClickListe
         mView = LayoutInflater.from(mContext).inflate(R.layout.ua_frag_root,container,false);
         ButterKnife.bind(this,mView);
 
+        Picasso.with(mContext)
+                .load(R.mipmap.head_logo)
+                .resize(ScreenUtil.getScreenWidth(mContext),ScreenUtil.getScreenHeight(mContext))
+                .centerCrop()
+                .into(mLogoImage);
 
         startAnimation();
         return mView;
@@ -72,41 +84,30 @@ public class PartnerSignUpFragment extends Fragment implements View.OnClickListe
 
 
     private void startAnimation() {
-        mRoot.setTranslationY(ScreenUtil.getScreenHeight(mContext));
-        mLoginButton.setAlpha(0f);
-        mSignUpButtton.setAlpha(0f);
-        mRoot.animate().translationY(0)
-                .setDuration(600)
-                .setInterpolator(new AccelerateInterpolator(1.5f))
-                .setListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animator) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animator) {
-                        mLoginButton.animate().alpha(1).setInterpolator(new DecelerateInterpolator()).start();
-                        mSignUpButtton.animate().alpha(1).setInterpolator(new DecelerateInterpolator()).start();
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animator) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animator) {
-
-                    }
-                })
+        int height = ScreenUtil.getScreenHeight(mContext);
+        mLogoImage.setTranslationY(-height);
+        mLoginButton.setTranslationY(height);
+        mSignUpButtton.setTranslationY(height);
+        mLogoImage.animate().translationY(0)
+                .setDuration(1600)
+                .setInterpolator(new DecelerateInterpolator(1.5f))
                 .start();
+        mLoginButton.animate().translationY(0)
+                .setDuration(1600)
+                .setInterpolator(new DecelerateInterpolator(1.5f))
+                .start();
+        mSignUpButtton.animate().translationY(0)
+                .setDuration(1600)
+                .setInterpolator(new DecelerateInterpolator(1.5f))
+                .start();
+
     }
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (mContext != null){
             mContext = null;
+            mCallback = null;
         }
     }
 
@@ -136,6 +137,7 @@ public class PartnerSignUpFragment extends Fragment implements View.OnClickListe
         super.onAttach(context);
 
         mContext = context;
+        mCallback = (RootCallback) context;
 
     }
 
@@ -172,25 +174,110 @@ public class PartnerSignUpFragment extends Fragment implements View.OnClickListe
 
     private void showSignUpPage() {
 
-        mCallback.showSigUpFragment();
+
+
+
+        int width = ScreenUtil.getScreenWidth(mContext);
+        int height = ScreenUtil.getScreenHeight(mContext);
+
+        mSignUpButtton.animate().translationY(100).setDuration(800)
+                .alpha(0f)
+                .setInterpolator(new DecelerateInterpolator(1.5f))
+                .start();
+        mLoginButton.animate().translationX(-width).setDuration(1200)
+                .setInterpolator(new DecelerateInterpolator(1.5f))
+                .start();
+        mLogoImage.animate().translationY(-height).setDuration(1200)
+                .alpha(0f)
+                .setInterpolator(new DecelerateInterpolator(1f))
+                .setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                            try {
+                                mCallback.showSigUpFragment();
+                            }
+                            catch (Exception e){
+                                throw  new NullPointerException("Cannot Call callback");
+                            }
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                })
+                .start();
+
 
 
     }
 
     private void showLoginPage() {
-        mCallback.showLoginFragment();
+
+
+
+        int width = ScreenUtil.getScreenWidth(mContext);
+        int height = ScreenUtil.getScreenHeight(mContext);
+
+        mLoginButton.animate().translationY(100).setDuration(800)
+                .alpha(0f)
+                .setInterpolator(new DecelerateInterpolator(1.5f))
+                .start();
+        mSignUpButtton.animate().translationX(width).setDuration(1200)
+                .setInterpolator(new DecelerateInterpolator(1.5f))
+                .start();
+        mLogoImage.animate().translationY(-height).setDuration(1200)
+                .alpha(0f)
+                .setInterpolator(new DecelerateInterpolator(1f))
+                .setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        try {
+                            mCallback.showLoginFragment();
+                        }
+                        catch (Exception e){
+                            throw  new NullPointerException("Cannot Call callback");
+                        }
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                })
+                .start();
+
 
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId()  == R.id.ua_login_button){
-            //Login Button Has been Clicked
             showLoginPage();
         }
         if (view.getId() == R.id.ua_signup_button){
             //Sign Up Button Clicked
-            showSignUpPage();
+           showSignUpPage();
         }
         else{
             //

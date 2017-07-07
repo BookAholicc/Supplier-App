@@ -1,17 +1,20 @@
 package com.bookaholicc.partner.Fragments.Aboarding;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -42,8 +45,12 @@ public class EmailFragment extends Fragment implements View.OnClickListener, Res
     TextInputLayout mEmail;
     @BindView(R.id.email_pass_fip)
     TextInputLayout mPassword;
+
     @BindView(R.id.email_submit_button)
     Button mNextButton;
+
+
+    @BindView(R.id.phone_number_tip) TextInputLayout mPhoneNumber;
     private Context mContext;
     View mView;
     private String firstName;
@@ -55,6 +62,9 @@ public class EmailFragment extends Fragment implements View.OnClickListener, Res
     public RegistrationCallback getmCallback() {
         return mCallback;
     }
+
+
+    private ProgressDialog mProgressDialog  = null;
 
     public void setmCallback(RegistrationCallback mCallback) {
         this.mCallback = mCallback;
@@ -78,6 +88,10 @@ public class EmailFragment extends Fragment implements View.OnClickListener, Res
         if (getArguments() != null){
             firstName = getArguments().getString(BundleKey.ARG_FIRST_NAME);
             lastName = getArguments().getString(BundleKey.ARG_LAST_NAME);
+        }
+
+        else{
+            throw new NullPointerException("No User Name");
         }
 
 
@@ -104,6 +118,24 @@ public class EmailFragment extends Fragment implements View.OnClickListener, Res
         super.onDestroy();
         if (mContext != null) {
             mContext = null;
+            mCallback = null;
+            mProgressDialog = null;
+        }
+    }
+
+
+    private void showProgressView() {
+        mProgressDialog = new ProgressDialog(mContext);
+        mProgressDialog.setTitle("Registering , Please Wait..");
+        mProgressDialog.setProgressDrawable(ContextCompat.getDrawable(mContext,R.drawable.progress_dialog));
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.show();
+    }
+
+    private void hideProgresDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()){
+            mProgressDialog.dismiss();
+            mProgressDialog= null;
         }
     }
 
@@ -126,6 +158,7 @@ public class EmailFragment extends Fragment implements View.OnClickListener, Res
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
+        mCallback = (RegistrationCallback) context;
     }
 
     @Override
@@ -156,15 +189,17 @@ public class EmailFragment extends Fragment implements View.OnClickListener, Res
     /** Validate the Fields, if Right then hit the Webservices */
     private void createAccount() {
 
+
         String emailAddress = mEmail.getEditText().getText().toString();
         String password = mPassword.getEditText().getText().toString();
+        String  phoneNumber = mPhoneNumber.getEditText().getText().toString();
         if (StringValidator.checkeEMail(emailAddress)){
             //correct Email
             if (StringValidator.checkPassword(password)){
 
                 //Hit the webservice
 
-                newjoin(emailAddress,password,firstName,lastName);
+                newjoin(emailAddress,password,firstName,lastName,phoneNumber);
 
 
             }
@@ -181,14 +216,22 @@ public class EmailFragment extends Fragment implements View.OnClickListener, Res
 
     }
 
-    private void newjoin(String emailAddress, String password, String firstName, String lastName) {
+    private void newjoin(String emailAddress, String password, String firstName, String lastName, String phoneNumber) {
+        showProgressView();
         JSONObject mUserObject = new JSONObject();
         try {
-            mUserObject.put("firstName",firstName);
-            mUserObject.put("lastName",password);
-            mUserObject.put("emailAddress",emailAddress);
-            mUserObject.put("password",password);
-            JsonObjectRequest mRequest = new JsonObjectRequest(APIUtils.REGISTER_API,mUserObject,this,this);
+
+
+
+            showProgressView();
+
+            mUserObject.put(APIUtils.FIRST_NAME,firstName);
+            mUserObject.put(APIUtils.LAST_NAME,lastName);
+
+            mUserObject.put(APIUtils.PARTNER_EMAIL,emailAddress);
+            mUserObject.put(APIUtils.PASSWORD,password);
+            mUserObject.put(APIUtils.PHONE_NUMBER,phoneNumber);
+            JsonObjectRequest mRequest = new JsonObjectRequest(Request.Method.POST,APIUtils.REGISTER_PARTNER,mUserObject,this,this);
 
             AppRequestQueue mRequestQueue = AppRequestQueue.getInstance(mContext);
             mRequestQueue.addToRequestQue(mRequest);
@@ -196,59 +239,60 @@ public class EmailFragment extends Fragment implements View.OnClickListener, Res
         }
         catch (Exception e){
             Log.d(TAG, "newjoin: ");
+            hideProgresDialog();
         }
     }
 
+
+
+
     @Override
     public void onResponse(JSONObject response) {
+        Log.d(TAG, "onResponse: From Registering "+response.toString());
 
         parseJson(response);
 
     }
 
     private void parseJson(JSONObject response) {
+        Log.d(TAG, "Got response "+response.toString());
         try {
-            String status  = response.getString("status");
-            if (Objects.equals(status, "success")){
-                //Registed
+            int status  = response.getInt("status");
+            if (status==1){
+                //Registered
                 User u = new User();
-                u.setFirstName(response.getString("firstName"));
-                u.setLastName(response.getString("lastName"));
-                u.seteMailAddress(response.getString("email"));
-                u.setPhoneNumber(response.getString("phoneNumber"));
+                u.setFirstName(response.getString(APIUtils.FIRST_NAME));
+                u.setLastName(response.getString(APIUtils.LAST_NAME));
+                u.seteMailAddress(response.getString(APIUtils.PARTNER_EMAIL));
+                u.setPhoneNumber(response.getString(APIUtils.PHONE_NUMBER));
+                u.setPartnerid(response.getInt(APIUtils.PARTNER_ID));
+                hideProgresDialog();
+
+
                 mCallback.registered(u);
 
 
             }
         }
         catch (Exception e){
+            hideProgresDialog();
             Log.d(TAG, "parseJson: Exception ");
             mCallback.notRegistered();
         }
     }
 
-    private void showPreferncePage() {
 
 
 
-    }
 
-    private void AlreadyExists() {
-
-    }
-
-    private String getData(JSONObject response) {
-
-        try {
-            return  response.getString("status");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     @Override
     public void onErrorResponse(VolleyError error) {
+        hideProgresDialog();
+        showFailedAlert();
+    }
+
+    private void showFailedAlert() {
 
     }
 

@@ -1,16 +1,13 @@
-package com.bookaholicc.partner.Fragments;
+package com.bookaholicc.partner.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -19,8 +16,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bookaholicc.partner.Adapter.BooksAdapter;
 import com.bookaholicc.partner.Model.MiniProduct;
-import com.bookaholicc.partner.Model.MiniProductDescription;
-import com.bookaholicc.partner.Model.Product;
 import com.bookaholicc.partner.Network.AppRequestQueue;
 import com.bookaholicc.partner.R;
 import com.bookaholicc.partner.StorageHelpers.DataStore;
@@ -38,12 +33,12 @@ import butterknife.ButterKnife;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by nandhu on 1/7/17.
  *
- *
+ * Created by nandhu on 5/7/17.
  */
 
-public class BookFragement extends Fragment implements Response.Listener<JSONObject>, Response.ErrorListener {
+public class BooksActivity extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject> {
+
 
     @BindView(R.id.book_text)
     TextView mBooksText;
@@ -55,35 +50,29 @@ public class BookFragement extends Fragment implements Response.Listener<JSONObj
     private String TATAGIG = "BOOKSLIST";
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.book_fragment, container, false);
-        ButterKnife.bind(this, v);
+        setContentView(R.layout.book_fragment);
+        ButterKnife.bind(this);
 
         showProgressView();
         getbooksList();
 
-
-        return v;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+
     private void showProgressView() {
-        mDialog = new ProgressDialog(mContext);
+        mDialog = new ProgressDialog(this);
         mDialog.setTitle("Getting Your Books..");
         mDialog.setIndeterminate(true);
         mDialog.show();
@@ -97,6 +86,7 @@ public class BookFragement extends Fragment implements Response.Listener<JSONObj
 
 
     private void getbooksList() {
+
         DataStore mStore = DataStore.getStorageInstance(mContext);
         int partnerId = mStore.getPartnerId();
         JSONObject mJsonObject  = new JSONObject();
@@ -112,73 +102,38 @@ public class BookFragement extends Fragment implements Response.Listener<JSONObj
         mAppRequestQueue.addToRequestQue(mJsonObjectRequest);
     }
 
-
     @Override
-    public void onStart() {
+    protected void onStart() {
         super.onStart();
     }
 
     @Override
-    public void onStop() {
+    protected void onStop() {
         super.onStop();
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
+    public void onErrorResponse(VolleyError error) {
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (mContext == null) {
-            mContext = context;
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mContext != null) {
-            mContext = null;
-        }
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     @Override
     public void onResponse(JSONObject response) {
+        hideProgresDialog();
         List<MiniProduct> mlist = getBooks(response);
-        BooksAdapter mAdapter  = new BooksAdapter(mContext,mlist);
+        BooksAdapter mAdapter  = new BooksAdapter(getApplicationContext(),mlist);
         mList.setAdapter(mAdapter);
 
         mList.setLayoutManager(new LinearLayoutManager(mContext));
-        mList.setHasFixedSize(true);
-        hideProgresDialog();
+
+
     }
-
-
-
 
     private List<MiniProduct> getBooks(JSONObject response) {
 
 
         Log.d(TAG, "getBooks: Response "+response.toString());
-         List<MiniProduct> mlist = new ArrayList<>();
+        List<MiniProduct> mlist = new ArrayList<>();
 
         try {
 
@@ -187,7 +142,7 @@ public class BookFragement extends Fragment implements Response.Listener<JSONObj
             for (int i = 0; i < mObject.length(); i++) {
                 JSONObject singObj = mObject.getJSONObject(i);
                 mlist.add(new MiniProduct(singObj.getInt(APIUtils.PID)
-                        , singObj.getString(APIUtils.PRODUCT_NAME),
+                        , singObj.getString(APIUtils.PNAME),
                         singObj.getString(APIUtils.IMAGE_URL),
                         singObj.getInt(APIUtils.AMOUNT)));
             }
@@ -198,11 +153,6 @@ public class BookFragement extends Fragment implements Response.Listener<JSONObj
             return null;
         }
 
-
-    }
-
-    @Override
-    public void onErrorResponse(VolleyError error) {
 
     }
 }

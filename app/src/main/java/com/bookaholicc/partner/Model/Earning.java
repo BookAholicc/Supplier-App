@@ -1,5 +1,7 @@
 package com.bookaholicc.partner.Model;
 
+import java.security.Timestamp;
+
 /**
  * Created by nandhu on 23/6/17.
  *
@@ -7,25 +9,28 @@ package com.bookaholicc.partner.Model;
 
 public class Earning {
 
-    public String pid;
+    public String pName;
     public String duraion;
     public String amount;
     public String productImage;
-    public String productName;
 
-    public Earning(String pid, String duraion, String amount) {
-        this.pid = pid;
-        this.duraion = duraion;
+    public String timeStamp;
+
+    public Earning(String pName, String amount, String imageURL, String timeStamp, String windowId) {
+        this.pName = pName;
+        this.duraion = windowId;
         this.amount = amount;
+        this.productImage = imageURL;
+        this.timeStamp = timeStamp;
 
     }
 
-    public String getPid() {
-        return pid;
+    public String getpName() {
+        return pName;
     }
 
-    public void setPid(String pid) {
-        this.pid = pid;
+    public void setpName(String pName) {
+        this.pName = pName;
     }
 
     public String getDuraion() {
@@ -52,11 +57,12 @@ public class Earning {
         this.productImage = productImage;
     }
 
-    public String getProductName() {
-        return productName;
+
+    public String getTimeStamp() {
+        return timeStamp;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
 }

@@ -1,8 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout android:layout_width="match_parent"
-    android:id="@+id/frag_holder_main"
-    android:layout_height="match_parent"
+
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:fillViewport="true"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-</FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:id="@+id/back_image"
+            android:layout_height="wrap_content" />
+        <RelativeLayout android:layout_width="match_parent"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/frag_holder_main"
+
+
+            android:layout_height="match_parent"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+
+            <include layout="@layout/home_top"
+                android:id="@+id/top_content"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/div"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="32dp"
+                android:layout_below="@id/top_content"
+                android:background="@color/md_redA400"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_below="@id/div"
+                android:id="@+id/amount_root"
+                android:layout_marginTop="12dp"
+                android:layout_height="wrap_content">
+
+                <!--Loading Root-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/amount_loading_root"
+                    android:layout_height="wrap_content">
+                    <ProgressBar
+                        android:layout_width="match_parent"
+                        android:id="@+id/amount_proress"
+                        android:layout_height="60dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Getting Your Balance"
+                        android:layout_below="@+id/amount_proress"
+                        android:textSize="18sp"
+
+                        android:gravity="center"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+                <!--Loaded Amount Root-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:visibility="invisible"
+                    android:id="@+id/amount_value_root"
+                    android:layout_height="wrap_content">
+                    <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+                        android:layout_width="match_parent"
+                        android:text="233"
+                        android:id="@+id/home_amount"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/amount_text_size"
+
+
+                        android:gravity="center"
+                        android:layout_height="wrap_content" />
+                    <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+                        android:layout_width="match_parent"
+                        android:text="is in your Wallet"
+                        android:textSize="@dimen/amt_sub_text"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:textColor="@color/material_grey800"
+                        android:id="@+id/wallet_amount_text"
+                        android:layout_below="@id/home_amount"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </FrameLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/div2"
+
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="16dp"
+                android:layout_below="@id/amount_root"
+                android:background="@color/material_grey700"/>
+
+
+            <RelativeLayout
+                android:layout_below="@id/div2"
+                android:layout_marginTop="12dp"
+                android:id="@+id/earning_root"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_height="60dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    app:srcCompat = "@drawable/ic_rupee_indian"
+                    android:padding="10dp"
+                    android:id="@+id/earning_rupee_symbol"
+                    android:layout_height="match_parent" />
+                <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+                    android:layout_width="wrap_content"
+                    android:text="View My Earnings "
+                    android:gravity="center"
+                    android:textColor="@color/text_color"
+                    android:layout_toRightOf="@id/earning_rupee_symbol"
+                    android:id="@+id/earning_text"
+                    android:textSize="@dimen/earning_text"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:layout_width="50dp"
+
+                    app:srcCompat = "@drawable/ic_right_arrow"
+                    android:padding="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/div3"
+
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="12dp"
+
+                android:layout_below="@id/earning_root"
+                android:background="@color/material_grey600"/>
+
+            <RelativeLayout
+                android:layout_below="@id/earning_root"
+                android:layout_marginTop="12dp"
+                android:id="@+id/books_text_root"
+
+                android:layout_width="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_height="60dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    app:srcCompat = "@drawable/ic_books"
+                    android:padding="10dp"
+                    android:id="@+id/earning_book_symbol"
+                    android:layout_height="match_parent" />
+                <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+                    android:layout_width="wrap_content"
+                    android:text="My Books"
+                    android:gravity="center"
+                    android:textColor="@color/text_color"
+                    android:layout_toRightOf="@id/earning_book_symbol"
+                    android:id="@+id/books_text"
+                    android:textSize="@dimen/books_text_size"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:layout_width="50dp"
+
+                    app:srcCompat = "@drawable/ic_right_arrow"
+                    android:padding="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
+
+
+
+
+        </RelativeLayout>
+    </FrameLayout>
+
+
+
+</ScrollView>

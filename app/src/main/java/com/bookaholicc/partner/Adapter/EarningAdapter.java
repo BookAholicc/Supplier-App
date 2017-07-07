@@ -8,12 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bookaholicc.partner.Fragments.EarningFragment;
 import com.bookaholicc.partner.Model.Earning;
 import com.bookaholicc.partner.R;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -28,10 +25,12 @@ import butterknife.ButterKnife;
 public class EarningAdapter extends RecyclerView.Adapter<EarningAdapter.EarningsHolder> {
     private List<Earning> mList;
     private Context mContext;
+    String rs = null;
 
-    public EarningAdapter(List<Earning> mList, EarningFragment earningFragment, Context mContext) {
+    public EarningAdapter(List<Earning> mList, Context mContext) {
         this.mContext = mContext;
         this.mList = mList;
+        rs = mContext.getString(R.string.rs);
 
     }
 
@@ -43,12 +42,15 @@ public class EarningAdapter extends RecyclerView.Adapter<EarningAdapter.Earnings
 
     @Override
     public void onBindViewHolder(EarningsHolder holder, int position) {
-            holder.pName.setText(mList.get(position).getProductName());
-        holder.duration.setText(mList.get(position).getDuraion());
-        Picasso.with(mContext)
+        long mTimeStamp = Long.parseLong(mList.get(position).getTimeStamp());
+            holder.pName.setText(mList.get(position).getpName());
+
+             Picasso.with(mContext)
                 .load(mList.get(position).getProductImage())
                 .into(holder.mImage);
-        holder.price.setText(mList.get(position).getAmount());
+          holder.mAmount.setText("+ "+ rs + mList.get(position).getAmount());
+          String date = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new java.util.Date (mTimeStamp*1000));
+          holder.mTimeStamp.setText(date);
     }
 
     @Override
@@ -61,9 +63,10 @@ public class EarningAdapter extends RecyclerView.Adapter<EarningAdapter.Earnings
 
 
         @BindView(R.id.earning_item_pname) TextView pName;
-        @BindView(R.id.earning_item_price) TextView price;
-        @BindView(R.id.earning_item_duration) TextView duration;
-        @BindView(R.id.earning_item_image) ImageView mImage;
+        @BindView(R.id.earning_item_pimage) ImageView mImage;
+        @BindView(R.id.earning_item_timestamp) TextView mTimeStamp;
+        @BindView(R.id.earning_item_amount) TextView mAmount;
+
         public EarningsHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);

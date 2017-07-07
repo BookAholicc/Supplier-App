@@ -12,9 +12,11 @@ import com.bookaholicc.partner.Fragments.Aboarding.EmailFragment;
 import com.bookaholicc.partner.Fragments.Aboarding.LoginFragment;
 import com.bookaholicc.partner.Fragments.Aboarding.PartnerSignUpFragment;
 import com.bookaholicc.partner.Fragments.Aboarding.SignUpNameFragment;
+import com.bookaholicc.partner.MainActivity;
 import com.bookaholicc.partner.Model.User;
 import com.bookaholicc.partner.R;
 import com.bookaholicc.partner.StorageHelpers.DataStore;
+import com.bookaholicc.partner.utils.BundleKey;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +32,7 @@ public class FirstActivity extends AppCompatActivity implements PartnerSignUpFra
 
 
     private static final String TAG = "FIRST ACT";
-    @BindView(R.id.ua_root)
+    @BindView(R.id.root_fa)
     FrameLayout mRoot;
 
 
@@ -39,14 +41,16 @@ public class FirstActivity extends AppCompatActivity implements PartnerSignUpFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.first_acitivity);
         ButterKnife.bind(this);
+        Log.d(TAG, "onCreate: Inside First Activity");
 
         showFirstActivity();
 
     }
 
     private void showFirstActivity() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.ua_root,new PartnerSignUpFragment())
+        Log.d(TAG, "showFirstActivity: Perfomring Transaction");
+        this.getSupportFragmentManager().beginTransaction()
+                .replace(R.id.root_fa,new PartnerSignUpFragment())
                 .commit();
     }
 
@@ -98,15 +102,17 @@ public class FirstActivity extends AppCompatActivity implements PartnerSignUpFra
 
     @Override
     public void showLoginFragment() {
+
+
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.ua_root,new LoginFragment())
+                .replace(R.id.root_fa,new LoginFragment())
                 .commit();
     }
 
     @Override
     public void showSigUpFragment() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.ua_root,new SignUpNameFragment())
+                .replace(R.id.root_fa,new SignUpNameFragment())
                 .commit();
     }
 
@@ -118,7 +124,7 @@ public class FirstActivity extends AppCompatActivity implements PartnerSignUpFra
             mStore.setFirstName(u.getFirstName());
             mStore.setLastName(u.getLastName());
             mStore.setEmailId(u.geteMailAddress());
-            mStore.setPartnerId(""+u.getPartnerId());
+            mStore.setPartnerId(u.getPartnerId());
         }
 
     }
@@ -136,8 +142,16 @@ public class FirstActivity extends AppCompatActivity implements PartnerSignUpFra
 
     @Override
     public void showEmailFragment(String firstName, String lastName) {
+
+        Bundle b = new Bundle();
+        b.putString(BundleKey.ARG_FIRST_NAME,firstName);
+        b.putString(BundleKey.ARG_LAST_NAME,lastName);
+
+        EmailFragment mEmailFragment  = new EmailFragment();
+        mEmailFragment.setArguments(b);
+
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.ua_root,new EmailFragment())
+                .replace(R.id.root_fa,mEmailFragment)
                 .commit();
     }
 
@@ -154,11 +168,16 @@ public class FirstActivity extends AppCompatActivity implements PartnerSignUpFra
             mStore.setFirstName(u.getFirstName());
             mStore.setLastName(u.getLastName());
             mStore.setEmailId(u.geteMailAddress());
-            mStore.setPartnerId(""+u.getPartnerId());
+            mStore.setPhoneNumberTag(u.getPhoneNumber());
+            mStore.setPartnerId(u.getPartnerId());
+            mStore.setIsFirstTime(false);
         }
-        Intent i = new Intent(this,FirstActivity.class);
+
+        Intent i = new Intent(this,MainActivity.class);
         startActivity(i);
         finish();
+
+
     }
 
     @Override

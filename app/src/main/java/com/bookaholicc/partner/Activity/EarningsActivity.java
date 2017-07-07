@@ -1,16 +1,14 @@
-package com.bookaholicc.partner.Fragments;
+package com.bookaholicc.partner.Activity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.MenuItem;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -35,63 +33,60 @@ import butterknife.ButterKnife;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by nandhu on 23/6/17.
- *
- * The Page Which Shows Earning of Partner in details ,
- *
- * Always get Timestamp from Requests
+ * Created by nandhu on 5/7/17.
  *
  */
 
-public class EarningFragment extends Fragment implements Response.Listener<JSONObject>, Response.ErrorListener {
-
-    private Context mContext;
-    private String TAGI = "EARNINGS";
-
+public class EarningsActivity extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject> {
 
     @BindView(R.id.earning_list)
     RecyclerView mList;
 
     ProgressDialog mDialog;
+    private String TAGI = "EARNING ACTIVITY";
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+        setContentView(R.layout.earning_breakdown);
+        ButterKnife.bind(this);
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.earning_breakdown,container,false);
-        ButterKnife.bind(this,v);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setTitle("Transactions");
+        }
 
 
         getEarnings();
 
-        return v;
-
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+
+
+
     private void showProgressView() {
-        mDialog = new ProgressDialog(mContext);
+        mDialog = new ProgressDialog(this);
         mDialog.setTitle("Getting latest Information");
         mDialog.setIndeterminate(true);
         mDialog.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void hideProgresDialog() {
@@ -99,9 +94,24 @@ public class EarningFragment extends Fragment implements Response.Listener<JSONO
             mDialog.dismiss();
         }
     }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 
     private void getEarnings() {
-        DataStore mStore  = DataStore.getStorageInstance(mContext);
+        showProgressView();
+        DataStore mStore  = DataStore.getStorageInstance(this);
         int partnerId = mStore.getPartnerId();
 
         try {
@@ -109,7 +119,7 @@ public class EarningFragment extends Fragment implements Response.Listener<JSONO
             JSONObject mJsonObject = new JSONObject();
             mJsonObject.put(APIUtils.PARTNER_ID, 4); //// TODO: 2/7/17 cange
             JsonObjectRequest mRequest  = new JsonObjectRequest(Request.Method.POST,APIUtils.PARTNER_EARNINGS_API,mJsonObject,this,this);
-            AppRequestQueue mRequestQueue = AppRequestQueue.getInstance(mContext);
+            AppRequestQueue mRequestQueue = AppRequestQueue.getInstance(this);
             mRequestQueue.addToRequestQue(mRequest);
 
         }
@@ -120,58 +130,26 @@ public class EarningFragment extends Fragment implements Response.Listener<JSONO
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mContext != null){
-            mContext = null;
-        }
-    }
+    public void onErrorResponse(VolleyError error) {
+        hideProgresDialog();
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (mContext == null){
-            mContext = context;
-        }
     }
 
     @Override
     public void onResponse(JSONObject response) {
+        Log.d(TAG, "onResponse: From Earning Adapter "+response.toString());
+
         List<Earning> mEarningsList =  parseData(response);
         //Got the List
 
-        EarningAdapter mAdapter = new EarningAdapter(mEarningsList,this,mContext);
-        mList.setLayoutManager(new LinearLayoutManager(mContext));
+        hideProgresDialog();
+        EarningAdapter mAdapter = new EarningAdapter(mEarningsList,this);
+        mList.setLayoutManager(new LinearLayoutManager(this));
         mList.setAdapter(mAdapter);
         mList.setHasFixedSize(true);
-
     }
 
+    @Nullable
     private List<Earning> parseData(JSONObject response) {
 
         try {
@@ -183,7 +161,9 @@ public class EarningFragment extends Fragment implements Response.Listener<JSONO
                 JSONObject mEarningObj  = mArray.getJSONObject(i);
                 mList.add(new Earning(mEarningObj.getString("productName"),
                         mEarningObj.getString("amount"),
-                        mEarningObj.getString(APIUtils.DURATION)));
+                        mEarningObj.getString("imageURL"),
+                        mEarningObj.getString("timestamp"),
+                        mEarningObj.getString(APIUtils.WINDOWID)));
             }
 
             return mList;
@@ -192,10 +172,5 @@ public class EarningFragment extends Fragment implements Response.Listener<JSONO
             Log.d(TAG, "parseData:Exception  "+e.getLocalizedMessage());
             return null;
         }
-    }
-
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        Log.d(TAG, "onErrorResponse: Exception "+error.getLocalizedMessage());
     }
 }

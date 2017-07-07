@@ -98,16 +98,10 @@ public class DataStore {
         }
     }
 
-    public  void setPartnerid(int partnerid){
-
-        editor.putInt(PARTNER_ID,partnerid);
-        editor.apply();
-
-    }
 
 
     public  int getPartnerId() {
-        return mSharedPrefrences.getInt(USER_ID,0);
+        return mSharedPrefrences.getInt(PARTNER_ID,0);
     }
 
     public void setEmailId(String emailIdTag) {
@@ -116,20 +110,7 @@ public class DataStore {
     }
 
 
-    public void setStateId(String stateId) {
-        editor.putString(STATE_ID, stateId);
-        editor.commit();
-    }
 
-    public void setStateName(String stateName) {
-        editor.putString(STATE_NAME,stateName);
-        editor.commit();
-    }
-
-    public  void setPartnerName(String userNameTag) {
-        editor.putString(USER_NAME_TAG, userNameTag);
-        editor.commit();
-    }
 
     public  void setPhoneNumberTag(String phoneNumberTag) {
         editor.putString(PHONE_NUMBER_TAG, phoneNumberTag);
@@ -137,22 +118,10 @@ public class DataStore {
     }
 
 
-    public  String getStateId() {
-        return mSharedPrefrences.getString(STATE_ID,null);
-    }
 
-
-
-    public  String getStateName() {
-        return mSharedPrefrences.getString(STATE_NAME,null);
-    }
-
-    public  String getUserName() {
-        return mSharedPrefrences.getString(USER_NAME_TAG,null);
-    }
 
     public  String getPhoneNumber() {
-        return mSharedPrefrences.getString(PHONE_NUMBER_TAG,null);
+        return mSharedPrefrences.getString(PHONE_NUMBER_TAG,"XXXX");
     }
 
 
@@ -314,18 +283,15 @@ public class DataStore {
         editor.apply();
     }
 
+    public  String getFirstName() {
+        return mSharedPrefrences.getString(FIRST_NAME,"Null");
+    }
+
     public void setLastName(String vLastName) {
         editor.putString(LAST_NAME,vLastName);
         editor.apply();
     }
 
-    public void addtoCart(Product p) {
-        MiniProductDescription m = new MiniProductDescription(p.getProductName(),p.getPid(),p.getImageURL());
-        Gson gs = new Gson();
-        String pStringToPush = gs.toJson(m);
-
-
-    }
 
     public void setTokenSaved(boolean b) {
         editor.putBoolean(TOKEN_SAVED,b);
@@ -356,8 +322,10 @@ public class DataStore {
         editor.apply();
     }
 
-    public void setPartnerId(String partnerId) {
-        editor.putString(PARTNER_ID,partnerId);
+
+
+    public void setPartnerId(int partnerId) {
+        editor.putInt(PARTNER_ID,partnerId);
         editor.apply();
     }
 }

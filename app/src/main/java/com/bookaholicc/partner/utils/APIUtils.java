@@ -34,7 +34,7 @@ public class APIUtils {
 
         //The Keys Assciated with that time
     public static final String PID = "pid";
-    public static final String PRODUCT_NAME = "pName";
+    public static final String PRODUCT_NAME = "productName";
     public static final String PRODUCT_DESC = "productDescription";
     public static final String AUTHOR_NAME = "authorName";
     public static final String MRP = "MRP";
@@ -83,9 +83,14 @@ public class APIUtils {
     //// TODO: 1/7/17  Add String
     public static final String PARTNER_HOME_API   = "https://us-central1-bookaholic-786.cloudfunctions.net/getPartnerHome";
     public static final String BOOK_LIST_API = "https://us-central1-bookaholic-786.cloudfunctions.net/getPartnerBook";
-    public static final String AMOUNT_EARNED = "amountEarned";
+    public static final String AMOUNT_EARNED = "currentAmount";
     public static final String BOOK_COUNT = "bookCount";
     public static final String ORDERS_COUNT = "ordersCount";
+    public static final String PARTNER_NAME = "partnerName";
+    public static final String PASSWORD = "password";
+    public static final String REGISTER_PARTNER = "https://us-central1-bookaholic-786.cloudfunctions.net/registerPartner";
+    public static final String LAST_NAME = "lastName";
+    public static final String PNAME = "pName";
 
     public static String SAVE_TOKEN_API = "";
 
@@ -98,7 +103,7 @@ public class APIUtils {
     public static final String  REGISTER_API = "";
     public static final String PHONE_NUMBER = "phoneNumber";
     public static String OUR_PRICE = "ourPrice";
-    public static String DURATION="duration";
+    public static String WINDOWID ="duration";
     public static String IMAGE_URL ="imageURL";
     public static String COMBO_ID = "comboId";
     public static String COMBO_NAME ="comboName";
@@ -119,4 +124,6 @@ public class APIUtils {
     public static String FROM_WHERE = "fromWhere";
     public static String PARTNER_ID = "partnerId";
 
+    public static String PARTNER_EMAIL = "emailAddress";
+    public static String STATUS = "status";
 }

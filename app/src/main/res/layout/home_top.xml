@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_height="wrap_content">
+
+    <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+        android:layout_width="match_parent"
+        android:text="Hello, Michael."
+        android:gravity="center"
+        android:elevation="32dp"
+        android:textSize="@dimen/name_ts"
+        android:id="@+id/home_partner_name"
+        android:textColor="@color/text_color"
+        android:layout_marginTop="36dp"
+
+        android:layout_height="wrap_content" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="@dimen/pp_dimen"
+        android:id="@+id/home_pp"
+        android:elevation="32dp"
+        android:layout_marginBottom="12dp"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/material_grey600"
+        android:layout_below="@id/home_partner_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_height="@dimen/pp_dimen" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="@dimen/img_size_side"
+        android:layout_height="@dimen/img_size_side"
+        android:elevation="16dp"
+        android:src="@drawable/ic_notification"
+        android:id="@+id/noti_image"
+        android:layout_alignTop="@+id/home_pp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/img_left"
+        android:layout_marginTop="30dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="@dimen/img_size_side"
+        android:layout_height="@dimen/img_size_side"
+        app:civ_border_overlay="true"
+    android:id="@+id/profile_image"
+        android:elevation="16dp"
+        android:src="@drawable/ic_user"
+        android:layout_alignTop="@+id/home_pp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/img_left"
+        android:layout_marginTop="30dp" />
+
+</RelativeLayout>

@@ -1,50 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:layout_width="100dp"
-            android:id="@+id/earning_item_image"
-            android:layout_height="match_parent" />
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
-        <TextView
-            android:id="@+id/earning_item_pname"
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:maxLines="3"
-            android:ellipsize="end"
-            android:layout_height="wrap_content"
-            android:text="The Sapiens  -Brief History of Huma"
-            android:layout_toEndOf="@+id/earning_item_image"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true" />
+    app:cardUseCompatPadding="true"
+    app:cardElevation="4dp"
+    android:layout_height="120dp">
 
-        <TextView
-            android:id="@+id/earning_item_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="22sp"
-            android:layout_marginTop="12dp"
-            android:text="119"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/earning_item_pname" />
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:orientation="horizontal"
+      android:weightSum="1"
+      android:layout_height="match_parent">
+      <ImageView
+          android:layout_width="0dp"
+          android:layout_weight="0.25"
+          android:id="@+id/earning_item_pimage"
+          android:layout_height="match_parent" />
+      <RelativeLayout
+          android:layout_width="0dp"
+          android:orientation="vertical"
+          android:layout_weight="0.55"
 
-        <TextView
-            android:id="@+id/earning_item_duration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/earning_item_price"
-            android:layout_marginTop="8dp"
+          android:layout_height="match_parent">
+          <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+              android:layout_width="match_parent"
+              android:text="What if a Really Long Line and klafdlasdklflksdjflkdsfkljklsdajfkjdskf"
+              android:textSize="20sp"
+              android:maxLines="2"
+              android:layout_marginTop="8dp"
+              android:ellipsize="end"
+              android:id="@+id/earning_item_pname"
+              android:layout_height="wrap_content" />
+          <TextView
+              android:layout_width="match_parent"
+              android:text="asdfsdafdsf"
+              android:layout_below="@+id/earning_item_pname"
+              android:layout_marginTop="8dp"
+              android:id="@+id/earning_item_timestamp"
+              android:textSize="12sp"
+              android:maxLines="2"
+              android:ellipsize="end"
+              android:gravity="center_vertical|left"
+              android:layout_marginLeft="12dp"
+              android:layout_alignParentBottom="true"
+              android:layout_height="wrap_content" />
 
-            android:layout_toEndOf="@+id/earning_item_pname"
-            android:gravity="center"
-            android:text="2 Weeks" />
-    </RelativeLayout>
+      </RelativeLayout>
+      <TextView
+          android:layout_width="0dp"
+          android:layout_weight="0.2"
+          android:gravity="center"
+          android:textSize="22sp"
+          android:text="259"
+
+          android:id="@+id/earning_item_amount"
+          android:layout_height="match_parent" />
+
+  </LinearLayout>
 
 </android.support.v7.widget.CardView>
