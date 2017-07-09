@@ -19,16 +19,20 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.bookaholicc.partner.Activity.AboutUsActivity;
 import com.bookaholicc.partner.Activity.BooksActivity;
 import com.bookaholicc.partner.Activity.EarningsActivity;
 import com.bookaholicc.partner.Activity.FirstActivity;
 import com.bookaholicc.partner.Activity.NotifcationsActivity;
 import com.bookaholicc.partner.Activity.ProfileActivity;
+import com.bookaholicc.partner.Activity.ReferFriendsActivity;
 import com.bookaholicc.partner.CustomUI.WhitenyBooksFont;
 
 import com.bookaholicc.partner.Network.AppRequestQueue;
@@ -103,6 +107,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.amount_value_root) RelativeLayout mAmountRoot;
 
 
+
+    ///header
+//    @BindView(R.id.header_title) WhitenyBooksFont mheaderName;
+//    @BindView(R.id.header_amount_text)
+//    TextView mHeaderAmount;
+
     private boolean isAnimationsDone = false;
     private String TAG = "PARTNER HOME";
 
@@ -122,7 +132,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             this.finish();
         }
 
-        mPartnerName.setText(mStore.getFirstName());
+        mPartnerName.setText("Hello, "+ mStore.getFirstName()+".");
+
 
         getData();
         setUpViews();
@@ -170,11 +181,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void startAnimations() {
-       mPartnerName.setTranslationY(ScreenUtil.getScreenHeight(this));
+       mPartnerName.setTranslationY(-ScreenUtil.getScreenHeight(this));
        mProfilePic.setTranslationY(mProfilePage.getTranslationY());
        mProfilePage.setTranslationX(ScreenUtil.getScreenWidth(this));
-        mNotifImage.setTranslationX(-ScreenUtil.getScreenWidth(this));
-        mPartnerName.animate().translationY(0).setDuration(600).setStartDelay(300).setInterpolator(new DecelerateInterpolator())
+       mNotifImage.setTranslationX(-ScreenUtil.getScreenWidth(this));
+       mPartnerName.animate().translationY(0).setDuration(600).setStartDelay(300).setInterpolator(new DecelerateInterpolator())
                 .setListener(new Animator.AnimatorListener(){
                     @Override
                     public void onAnimationStart(Animator animator) {
@@ -228,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DataStore mStore = DataStore.getStorageInstance(this);
         int partnerId = mStore.getPartnerId();
         try {
-            mObject.put(APIUtils.PARTNER_ID, 4);
+            mObject.put(APIUtils.PARTNER_ID, partnerId);
         } catch (Exception e) {
             Log.d(TAG, "getData: Exception in putting JSON File");
         }
@@ -265,25 +276,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-//        int id = item.getItemId();
+        int id = item.getItemId();
 //
-//        if (id == R.id.nav_camera) {
+        Intent i = null;
+        if (id == R.id.nav_my_books) {
 //            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
+            i = new Intent(this,BooksActivity.class);
+        } else if (id == R.id.nav_transactions) {
+            i = new Intent(this,EarningsActivity.class);
+        } else if (id == R.id.nav_refer_friends) {
+                i = new Intent(this,ReferFriendsActivity.class);
+        } else if (id == R.id.nav_abt_us) {
+              i = new Intent(this,AboutUsActivity.class);
+        } else if (id == R.id.nav_share) {
+            Toast.makeText(this,"Share Play Store Link",Toast.LENGTH_LONG).show();
+        }
+
+        startActivity(i);
 //
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
-//
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        drawer.closeDrawer(GravityCompat.START);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
         return true;
+
+//
     }
 
 //    @Override

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/my_black"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/no_trans_image"
+        app:srcCompat = "@drawable/icupdown"
+        android:layout_height="100dp">
+
+    </ImageView>
+    <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+        android:layout_width="match_parent"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:textColor="@color/material_white"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/no_trans_image"
+        android:id="@+id/no_trans_text"
+        android:text="No Transactions."
+        android:layout_height="wrap_content">
+
+    </com.bookaholicc.partner.CustomUI.WhitenyBooksFont>
+    <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+        android:layout_width="match_parent"
+        android:textSize="18sp"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:gravity="center"
+        android:textColor="@color/material_white"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/no_trans_text"
+        android:id="@+id/no_trans_sbtext"
+        android:text="Add More books to increase your chance of transactions"
+        android:layout_height="wrap_content">
+
+    </com.bookaholicc.partner.CustomUI.WhitenyBooksFont>
+
+</RelativeLayout>

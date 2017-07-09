@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/my_black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        app:srcCompat= "@drawable/ic_sad"
+        android:id="@+id/no_book_image"
+        android:layout_height="100dp" />
+    <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="22sp"
+        android:textColor="@color/material_white"
+        android:id="@+id/no_books_text"
+        android:layout_below="@+id/no_book_image"
+        android:text="No Books Here."
+        android:layout_height="wrap_content" />
+    <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textColor="@color/material_white"
+        android:id="@+id/no_books_sub_text"
+        android:layout_below="@id/no_books_text"
+        android:text="You can Add books Just by taking a Image"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:text="Add books "
+        android:id="@+id/no_add_books"
+        android:layout_below="@+id/no_books_sub_text"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

@@ -42,6 +42,14 @@ public class User {
         this.def_Lon = def_Lon;
     }
 
+    public User(int partnerId, String firstName, String lastName, String emailAddress, String phoneNumber) {
+        this.partnerid = partnerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.eMailAddress  = emailAddress;
+        this.phoneNumber = phoneNumber;
+    }
+
     public int getPartnerid() {
         return partnerid;
     }

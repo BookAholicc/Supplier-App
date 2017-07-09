@@ -91,6 +91,7 @@ public class APIUtils {
     public static final String REGISTER_PARTNER = "https://us-central1-bookaholic-786.cloudfunctions.net/registerPartner";
     public static final String LAST_NAME = "lastName";
     public static final String PNAME = "pName";
+    public static final String LOGIN_API = "";
 
     public static String SAVE_TOKEN_API = "";
 

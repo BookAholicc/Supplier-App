@@ -59,6 +59,7 @@
         android:layout_height="60dp">
         <EditText
             android:id="@+id/pass_box"
+            android:textColor="@color/material_white"
             android:layout_width="match_parent"
             android:textColorHint="@color/material_white"
             android:layout_height="match_parent"
@@ -84,7 +85,7 @@
             android:layout_height="match_parent"
             android:textColorHint="@color/material_white"
             style="@style/edit_box"
-            android:inputType="textPassword" />
+            android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 
 

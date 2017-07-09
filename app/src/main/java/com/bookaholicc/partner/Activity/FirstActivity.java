@@ -125,6 +125,7 @@ public class FirstActivity extends AppCompatActivity implements PartnerSignUpFra
             mStore.setLastName(u.getLastName());
             mStore.setEmailId(u.geteMailAddress());
             mStore.setPartnerId(u.getPartnerId());
+            mStore.setIsFirstTime(false);
         }
 
     }

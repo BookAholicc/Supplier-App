@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    >
+
+    <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+        android:layout_width="match_parent"
+        android:text="Enter new Quantity"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:id="@+id/edit_text_quantity"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edit1"
+        android:layout_alignLeft="@id/edit_text_quantity"
+        android:hint="Enter New Quantity"
+        android:layout_marginTop="16dp"
+        android:layout_width="250dp"
+        android:layout_below="@+id/edit_text_quantity"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

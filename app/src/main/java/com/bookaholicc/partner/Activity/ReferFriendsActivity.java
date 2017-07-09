@@ -1,40 +1,39 @@
 package com.bookaholicc.partner.Activity;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.bookaholicc.partner.R;
+import com.bookaholicc.partner.utils.ScreenUtil;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by nandhu on 5/7/17.
+ * Created by nandhu on 8/7/17.
  *
  */
 
-public class AboutUsActivity extends AppCompatActivity {
+public class ReferFriendsActivity extends AppCompatActivity {
 
-    @BindView(R.id.about_app)
+
+
+    @BindView(R.id.refer_background)
     ImageView mImage;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.about_us);
+        setContentView(R.layout.refer_friends_activity);
         ButterKnife.bind(this);
         Picasso.with(this)
-                .load(R.mipmap.head_logo)
+                .load(R.mipmap.inviite_bg)
+                .resize(ScreenUtil.getScreenWidth(this),ScreenUtil.getScreenHeight(this))
+                .centerCrop()
                 .into(mImage);
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 
     @Override

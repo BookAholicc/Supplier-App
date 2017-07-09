@@ -55,6 +55,7 @@
     <Button
         android:layout_width="match_parent"
         android:textAllCaps="false"
+        android:id="@+id/login_submit_button"
         android:layout_below="@id/login_pass_editbox"
         android:layout_marginTop="96dp"
         android:background="@drawable/signup_button_ripple"

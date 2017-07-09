@@ -1,5 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/my_black"
     android:layout_width="match_parent" android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="200dp"
+        android:id="@+id/about_app"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="200dp" />
+
+    <!--Title Text-->
+    <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+        android:layout_width="match_parent"
+        android:layout_below="@+id/about_app"
+        android:layout_marginTop="60dp"
+        android:text="BookAholic "
+        android:id="@+id/about_title_text"
+        android:textColor="@color/material_redA400"
+        android:gravity="center_horizontal"
+        android:textSize="32sp"
+        android:layout_height="wrap_content" />
+    <!--Version Name-->
+    <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+        android:layout_width="match_parent"
+        android:layout_below="@+id/about_title_text"
+        android:layout_marginTop="4dp"
+        android:text="Version 1.0.1 "
+        android:id="@+id/about_stitle_text"
+        android:textColor="@color/material_white"
+        android:gravity="center_horizontal"
+        android:textSize="18sp"
+        android:layout_height="wrap_content" />
+    <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+        android:layout_width="match_parent"
+        android:layout_below="@+id/about_stitle_text"
+        android:layout_marginTop="8dp"
+        android:text="www.bookaholicc.com"
+        android:id="@+id/about_sctitle_text"
+        android:textColor="@color/material_white"
+        android:gravity="center_horizontal"
+        android:textSize="18sp"
+        android:layout_height="wrap_content" />
+    <!--Support-->
+    <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+        android:layout_width="match_parent"
+        android:layout_below="@+id/about_title_text"
+        android:layout_marginTop="4dp"
+        android:text="Version 1.0.1 "
+        android:id="@+id/about_sdtitle_text"
+        android:textColor="@color/material_white"
+        android:gravity="center_horizontal"
+        android:textSize="18sp"
+        android:layout_height="wrap_content" />
+
 
 </RelativeLayout>

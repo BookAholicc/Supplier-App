@@ -2,7 +2,9 @@ package com.bookaholicc.partner.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +20,8 @@ import com.bookaholicc.partner.StorageHelpers.DataStore;
 import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
+import java.net.URI;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +29,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by nandhu on 5/7/17.
+ *
  */
 
 public class ProfileActivity extends AppCompatActivity{
@@ -120,7 +125,10 @@ public class ProfileActivity extends AppCompatActivity{
                 return;
             }
             try{
-                Log.d(TAG, "onActivityResult: Data from Selcting Image "+data.getDataString());
+
+
+
+
                 Picasso.with(this)
                         .load(data.getData())
                         .into(mImageView);

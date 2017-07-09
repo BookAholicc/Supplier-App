@@ -9,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -42,6 +45,9 @@ public class EarningsActivity extends AppCompatActivity implements Response.Erro
     @BindView(R.id.earning_list)
     RecyclerView mList;
 
+    @BindView(R.id.earning_root_frame)
+    RelativeLayout mRoot;
+
     ProgressDialog mDialog;
     private String TAGI = "EARNING ACTIVITY";
 
@@ -71,7 +77,11 @@ public class EarningsActivity extends AppCompatActivity implements Response.Erro
     }
 
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
     private void showProgressView() {
         mDialog = new ProgressDialog(this);
@@ -83,7 +93,7 @@ public class EarningsActivity extends AppCompatActivity implements Response.Erro
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            return true;
+           onBackPressed();
         }
 
         return super.onOptionsItemSelected(item);
@@ -140,13 +150,30 @@ public class EarningsActivity extends AppCompatActivity implements Response.Erro
         Log.d(TAG, "onResponse: From Earning Adapter "+response.toString());
 
         List<Earning> mEarningsList =  parseData(response);
-        //Got the List
-
         hideProgresDialog();
-        EarningAdapter mAdapter = new EarningAdapter(mEarningsList,this);
-        mList.setLayoutManager(new LinearLayoutManager(this));
-        mList.setAdapter(mAdapter);
-        mList.setHasFixedSize(true);
+        if (mEarningsList!= null){
+            //Got the List
+
+
+            EarningAdapter mAdapter = new EarningAdapter(mEarningsList,this);
+            mList.setLayoutManager(new LinearLayoutManager(this));
+            mList.setAdapter(mAdapter);
+            mList.setHasFixedSize(true);
+        }
+        else{
+
+            if (mRoot != null && mRoot.isShown()){
+
+                mRoot.removeAllViews();
+                View mNoOrders = View.inflate(this,R.layout.no_trans,mRoot);
+
+
+
+            }
+
+
+        }
+
     }
 
     @Nullable
@@ -157,6 +184,10 @@ public class EarningsActivity extends AppCompatActivity implements Response.Erro
 
             List<Earning> mList = new ArrayList<>();
             JSONArray mArray = response.getJSONArray("transactions");
+
+            if(mArray == null){
+                return null;
+            }
             for (int i=0; i<mArray.length();i++){
                 JSONObject mEarningObj  = mArray.getJSONObject(i);
                 mList.add(new Earning(mEarningObj.getString("productName"),

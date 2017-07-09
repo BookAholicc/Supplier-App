@@ -74,8 +74,6 @@ public class PartnerSignUpFragment extends Fragment implements View.OnClickListe
 
         Picasso.with(mContext)
                 .load(R.mipmap.head_logo)
-                .resize(ScreenUtil.getScreenWidth(mContext),ScreenUtil.getScreenHeight(mContext))
-                .centerCrop()
                 .into(mLogoImage);
 
         startAnimation();
@@ -89,15 +87,15 @@ public class PartnerSignUpFragment extends Fragment implements View.OnClickListe
         mLoginButton.setTranslationY(height);
         mSignUpButtton.setTranslationY(height);
         mLogoImage.animate().translationY(0)
-                .setDuration(1600)
+                .setDuration(1000)
                 .setInterpolator(new DecelerateInterpolator(1.5f))
                 .start();
         mLoginButton.animate().translationY(0)
-                .setDuration(1600)
+                .setDuration(1000)
                 .setInterpolator(new DecelerateInterpolator(1.5f))
                 .start();
         mSignUpButtton.animate().translationY(0)
-                .setDuration(1600)
+                .setDuration(1000)
                 .setInterpolator(new DecelerateInterpolator(1.5f))
                 .start();
 
@@ -199,7 +197,10 @@ public class PartnerSignUpFragment extends Fragment implements View.OnClickListe
                     @Override
                     public void onAnimationEnd(Animator animation) {
                             try {
-                                mCallback.showSigUpFragment();
+                                if(mCallback != null){
+                                    mCallback.showSigUpFragment();
+                                }
+
                             }
                             catch (Exception e){
                                 throw  new NullPointerException("Cannot Call callback");

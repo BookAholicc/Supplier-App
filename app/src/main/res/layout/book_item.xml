@@ -1,34 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:weightSum="1"
-    android:layout_width="match_parent" android:layout_height="80dp">
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_weight="0.2"
-        android:id="@+id/b_item_purl"
-        android:src="@mipmap/bookaholic"
-        android:layout_height="match_parent" />
+<android.support.v7.widget.CardView android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/material_white"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_weight="0.6"
-        android:textSize="18sp"
-        android:padding="4dp"
-        android:textColor="@color/my_black"
-        android:id="@+id/b_item_pname"
-        android:maxLines="3"
-        android:gravity="left"
-        android:ellipsize="end"
-        android:text="This is a logn booajfjakfjsdfjahjfkhajsdfhkashdfjkhjskdhfkjahsdfjkhajksfdhjahsdfkjhasfdk"
-        android:layout_height="match_parent" />
-    <TextView
-        android:layout_width="0dp"
-        android:layout_weight="0.2"
-        android:text="456"
-        android:id="@+id/b_item_amount"
-        android:textSize="22sp"
-        android:gravity="center"
-        android:layout_height="match_parent" />
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="100dp"
 
-</LinearLayout>
+            android:id="@+id/b_item_purl"
+            android:src="@mipmap/bookaholic"
+            android:layout_height="100dp" />
+
+        <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+            android:layout_width="wrap_content"
+            android:textSize="20sp"
+            android:padding="4dp"
+            android:textColor="@color/material_black"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/b_item_purl"
+
+            android:id="@+id/b_item_pname"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Fity things you didnt know About in 2017"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/b_item_purl"
+            android:text="456"
+            android:textColor="@color/my_black"
+            android:layout_below="@+id/b_item_pname"
+            android:id="@+id/b_item_amount"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="@color/my_black"
+            android:layout_toRightOf="@+id/b_item_purl"
+            android:text="Availblity Status"
+            android:layout_below="@+id/b_item_amount"
+            android:id="@+id/b_item_status_text"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/b_item_switch"
+            android:layout_alignBottom="@id/b_item_status_text"
+            android:layout_toRightOf="@id/b_item_status_text"
+            android:layout_alignTop="@id/b_item_status_text"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:layout_below="@id/b_item_purl"
+            android:background="@color/material_grey300"
+            android:id="@+id/p_item_div"
+            />
+
+        <com.bookaholicc.partner.CustomUI.WhitenyBooksFont
+            android:layout_width="wrap_content"
+            android:text="Change Quantity"
+            android:id="@+id/chg_quantity_text"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="16dp"
+            android:textSize="20sp"
+            android:textColor="@color/material_grey900"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="6dp"
+            android:layout_below="@+id/p_item_div"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_alignTop="@id/chg_quantity_text"
+            android:text="25"
+            android:layout_toLeftOf="@+id/right_arrow"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/material_black"
+            android:layout_alignBottom="@id/chg_quantity_text"
+            android:layout_height="wrap_content" />
+        <com.bookaholicc.partner.CustomUI.ForegroundImageView
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+
+            app:srcCompat ="@drawable/ic_ra"
+            android:padding="4dp"
+            android:id="@+id/right_arrow"
+            android:layout_alignTop="@id/chg_quantity_text"
+            android:layout_alignBottom="@id/chg_quantity_text"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>
